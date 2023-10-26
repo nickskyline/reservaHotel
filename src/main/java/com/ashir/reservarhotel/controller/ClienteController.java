@@ -62,7 +62,7 @@ public class ClienteController {
         if (eliminado) {
             return new ResponseEntity<>("Cliente eliminado con exito", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Cliente no encontrado", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Cliente no encontradogit ", HttpStatus.NOT_FOUND);
         }
     }
 

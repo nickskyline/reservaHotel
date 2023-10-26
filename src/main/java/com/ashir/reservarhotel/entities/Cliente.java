@@ -2,6 +2,8 @@ package com.ashir.reservarhotel.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -28,8 +30,17 @@ public class Cliente {
     @Column(name = "email", nullable = false)
     public String email;
 
-    @OneToOne(mappedBy = "cliente")
-    private Reserva reserva;
+    @OneToMany(mappedBy = "cliente")
+    private Set<Reserva> reserva;
+
+    public Set<Reserva> getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Set<Reserva> reserva) {
+        this.reserva = reserva;
+    }
+
     public Cliente() {
     }
 

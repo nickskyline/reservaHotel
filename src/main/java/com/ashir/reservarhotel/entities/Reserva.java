@@ -19,13 +19,29 @@ public class Reserva {
     @Column(name = "precio_total", nullable = false)
     public Double precioTotal;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_habitacion", referencedColumnName = "id")
     private Habitacion habitacion;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(Habitacion habitacion) {
+        this.habitacion = habitacion;
+    }
 
     public Reserva() {
     }
