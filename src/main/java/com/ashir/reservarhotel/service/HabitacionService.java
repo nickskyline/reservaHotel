@@ -23,7 +23,7 @@ public class HabitacionService {
         return habitacionRepository.save(habitacion);
     }
 
-    public List<Habitacion> obtenerTodosLasHabitaciones() {
+    public List<Habitacion> obtenerTodasLasHabitaciones() {
         return habitacionRepository.findAll();
     }
 
