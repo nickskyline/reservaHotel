@@ -1,0 +1,47 @@
+[
+  {
+    "clienteCedula": "1234567890",
+    "habitacionId": 1,
+    "fechaReserva": "2023-11-16"
+  },
+  {
+    "clienteCedula": "9876543210",
+    "habitacionId": 2,
+    "fechaReserva": "2023-11-17"
+  },
+  {
+    "clienteCedula": "5555555555",
+    "habitacionId": 3,
+    "fechaReserva": "2023-11-18"
+  },
+  {
+    "clienteCedula": "7777777777",
+    "habitacionId": 4,
+    "fechaReserva": "2023-11-19"
+  },
+  {
+    "clienteCedula": "1111111111",
+    "habitacionId": 5,
+    "fechaReserva": "2023-11-20"
+  },
+  {
+    "clienteCedula": "2222222222",
+    "habitacionId": 6,
+    "fechaReserva": "2023-11-21"
+  },
+  {
+    "clienteCedula": "6666666666",
+    "habitacionId": 7,
+    "fechaReserva": "2023-11-22"
+  },
+  {
+    "clienteCedula": "8888888888",
+    "habitacionId": 8,
+    "fechaReserva": "2023-11-23"
+  },
+  {
+    "clienteCedula": "3333333333",
+    "habitacionId": 9,
+    "fechaReserva": "2023-11-24"
+  }
+]

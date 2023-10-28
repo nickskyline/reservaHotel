@@ -1,6 +1,7 @@
 package com.ashir.reservarhotel.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,13 +20,23 @@ public class Reserva {
     @Column(name = "precio_total", nullable = false)
     public Double precioTotal;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
+    @JsonBackReference
     private Cliente cliente;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "id_habitacion", referencedColumnName = "id")
-    private Double id_habitacion;
+    @JsonBackReference
+    private Habitacion habitacion;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public Reserva() {
     }
@@ -60,13 +71,17 @@ public class Reserva {
         this.precioTotal = precioTotal;
     }
 
-    public Double getId_habitacion() {
-        return id_habitacion;
+    public void setId_habitacion(Long habitacionId) {
     }
 
-    public void setId_habitacion(Double id_habitacion) {
-        this.id_habitacion = id_habitacion;
+    public Habitacion getHabitacion() {
+        return habitacion;
     }
+
+    public void setHabitacion(Habitacion habitacion) {
+        this.habitacion = habitacion;
+    }
+
 
 }
 

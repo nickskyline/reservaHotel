@@ -1,6 +1,12 @@
 package com.ashir.reservarhotel.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "cliente")
@@ -28,8 +34,18 @@ public class Cliente {
     @Column(name = "email", nullable = false)
     public String email;
 
-    @OneToOne(mappedBy = "cliente")
-    private Reserva reserva;
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private Set<Reserva> reserva = new HashSet<>();
+
+    public Set<Reserva> getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Set<Reserva> reserva) {
+        this.reserva = reserva;
+    }
+
     public Cliente() {
     }
 

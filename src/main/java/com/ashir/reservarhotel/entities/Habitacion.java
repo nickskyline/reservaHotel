@@ -2,7 +2,11 @@ package com.ashir.reservarhotel.entities;
 
 
 import com.ashir.reservarhotel.model.TipoHabitacion;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "habitacion")
@@ -18,8 +22,9 @@ public class Habitacion {
     @Column(name = "precio_base", nullable = false)
     public Double precioBase;
 
-    @OneToOne(mappedBy = "habitacion")
-    private Reserva reserva;
+    @OneToMany(mappedBy = "habitacion")
+    @JsonManagedReference
+    private List<Reserva> reservas = new ArrayList<>();
 
     public Habitacion() {
     }
@@ -53,4 +58,13 @@ public class Habitacion {
     public void setPrecioBase(Double precioBase) {
         this.precioBase = precioBase;
     }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
 }

@@ -1,39 +1,49 @@
 package com.ashir.reservarhotel.controller;
 
-import com.ashir.reservarhotel.entities.Cliente;
 import com.ashir.reservarhotel.entities.Habitacion;
+import com.ashir.reservarhotel.model.HabitacionDto;
 import com.ashir.reservarhotel.model.TipoHabitacion;
 import com.ashir.reservarhotel.service.HabitacionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/habitaciones")
 public class HabitacionController {
+
     private HabitacionService habitacionService;
 
     @Autowired
     public HabitacionController(HabitacionService habitacionService) {
         this.habitacionService = habitacionService;
     }
-    @PostMapping
-    public ResponseEntity<String> crearHabitacion(@RequestBody Habitacion habitacion) {
-        Habitacion nuevaHabitacion = habitacionService.crearHabitacion(habitacion);
-        return new ResponseEntity<>("Habitacion creada con exito", HttpStatus.CREATED);
+
+    @PostMapping("/crear")
+    public ResponseEntity<?> crearHabitacion(@RequestBody HabitacionDto request) {
+        try {
+            Habitacion habitacion = habitacionService.crearHabitacion(request.getTipoHabitacion(), request.getPrecioBase());
+            return ResponseEntity.ok(habitacion);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(ex.getMessage());
+        }
     }
-    @GetMapping
+
+
+    @GetMapping("/todas")
     public ResponseEntity<List<Habitacion>> obtenerTodasLasHabitaciones() {
         List<Habitacion> habitaciones = habitacionService.obtenerTodasLasHabitaciones();
-        return new ResponseEntity<>(habitaciones, HttpStatus.OK);
+        return ResponseEntity.ok(habitaciones);
     }
-    @GetMapping("/buscar")
-    public ResponseEntity<Habitacion> buscarPorTipoDeHabitacion(@RequestParam("tipo_habitacion")TipoHabitacion tipoHabitacion) {
-        Habitacion habitacion =habitacionService.ObtenerPorTipo(tipoHabitacion);
 
+    @GetMapping("/{habitacionId}")
+    public ResponseEntity<Habitacion> obtenerHabitacionPorId(@PathVariable Long habitacionId) {
+        Habitacion habitacion = habitacionService.obtenerHabitacionPorId(habitacionId);
         if (habitacion != null) {
             return ResponseEntity.ok(habitacion);
         } else {
@@ -41,17 +51,35 @@ public class HabitacionController {
         }
     }
 
-    @PutMapping("/actualizar")
-    public ResponseEntity<String> actualizarHabitacion(@RequestParam("tipo_habitacion") TipoHabitacion tipoHabitacion, @RequestBody Habitacion habitacionActualizada) {
-        boolean actualizado = habitacionService.actualizarHabitacionPorTipo(tipoHabitacion, habitacionActualizada);
+    @GetMapping("/disponibles")
+    public ResponseEntity<List<Habitacion>> obtenerHabitacionesDisponiblesPorFecha(
+            @RequestParam("fechaReserva") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaReserva) {
+        List<Habitacion> habitaciones = habitacionService.buscarHabitacionesDisponiblesPorFecha(fechaReserva);
+        return ResponseEntity.ok(habitaciones);
+    }
 
-        if (actualizado) {
-            return new ResponseEntity<>("Habitacion actualizada con exito", HttpStatus.OK);
+    @GetMapping("/disponibles/tipo")
+    public ResponseEntity<List<Habitacion>> obtenerHabitacionesDisponiblesPorTipoYFecha(
+            @RequestParam("fechaReserva") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaReserva,
+            @RequestParam("tipoHabitacion") TipoHabitacion tipoHabitacion) {
+        List<Habitacion> habitaciones = habitacionService.buscarHabitacionesDisponiblesPorTipoYFecha(fechaReserva, tipoHabitacion);
+        return ResponseEntity.ok(habitaciones);
+    }
+
+    @PutMapping("/actualizar/{habitacionId}")
+    public ResponseEntity<Habitacion> actualizarHabitacion(@PathVariable Long habitacionId, @RequestBody HabitacionDto request) {
+        Habitacion habitacion = habitacionService.actualizarHabitacion(habitacionId, request.getTipoHabitacion(), request.getPrecioBase());
+        if (habitacion != null) {
+            return ResponseEntity.ok(habitacion);
         } else {
-            return new ResponseEntity<>("Habitacion no encontrada", HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 
-
-
+    @DeleteMapping("/eliminar/{habitacionId}")
+    public ResponseEntity<String> eliminarHabitacion(@PathVariable Long habitacionId) {
+        habitacionService.eliminarHabitacion(habitacionId);
+        return ResponseEntity.ok("Habitación eliminada con éxito");
+    }
 }
+

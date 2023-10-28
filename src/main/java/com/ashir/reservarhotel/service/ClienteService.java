@@ -19,6 +19,10 @@ public class ClienteService {
     }
 
     public Cliente crearCliente(Cliente cliente) {
+
+        if (clienteRepository.findByCedula(cliente.getCedula()) != null) {
+            throw new RuntimeException("El cliente con la cédula proporcionada ya existe");
+        }
         return clienteRepository.save(cliente);
     }
 
@@ -27,37 +31,48 @@ public class ClienteService {
     }
 
     public Cliente obtenerClientePorCedula(String cedula) {
-        return clienteRepository.findByCedula(cedula);
+
+        Cliente cliente = clienteRepository.findByCedula(cedula);
+        if (cliente == null) {
+            throw new RuntimeException("El cliente con la cédula proporcionada no existe");
+        }
+
+        return cliente;
     }
 
     public boolean actualizarClientePorCedula(String cedula, Cliente clienteActualizado) {
-        Optional<Cliente> clienteOptional = Optional.ofNullable(clienteRepository.findByCedula(cedula));
 
-        if (clienteOptional.isPresent()) {
-            Cliente clienteExistente = clienteOptional.get();
-
-            clienteExistente.setNombres(clienteActualizado.getNombres());
-            clienteExistente.setApellidos(clienteActualizado.getApellidos());
-            clienteExistente.setCedula(clienteActualizado.getCedula());
-            clienteExistente.setDireccion(clienteActualizado.getDireccion());
-            clienteExistente.setEdad(clienteActualizado.getEdad());
-            clienteExistente.setEmail(clienteActualizado.getEmail());
-
-            clienteRepository.save(clienteExistente);
-            return true;
+        Cliente clienteExistente = clienteRepository.findByCedula(cedula);
+        if (clienteExistente == null) {
+            throw new RuntimeException("El cliente con la cédula proporcionada no existe");
         }
 
-        return false;
+        if (clienteRepository.findByCedula(clienteExistente.getCedula()) != null) {
+            throw new RuntimeException("El cliente con la cédula proporcionada ya existe");
+        }
+
+
+        // Actualizar los campos del cliente
+        clienteExistente.setNombres(clienteActualizado.getNombres());
+        clienteExistente.setApellidos(clienteActualizado.getApellidos());
+        clienteExistente.setCedula(clienteActualizado.getCedula());
+        clienteExistente.setDireccion(clienteActualizado.getDireccion());
+        clienteExistente.setEdad(clienteActualizado.getEdad());
+        clienteExistente.setEmail(clienteActualizado.getEmail());
+
+        clienteRepository.save(clienteExistente);
+        return true;
     }
 
     public boolean eliminarCliente(String cedula) {
-        Optional<Cliente> clienteOptional = Optional.ofNullable(clienteRepository.findByCedula(cedula));
 
-        if (clienteOptional.isPresent()) {
-            clienteRepository.delete(clienteOptional.get());
-            return true;
+        Cliente cliente = clienteRepository.findByCedula(cedula);
+        if (cliente == null) {
+            throw new RuntimeException("El cliente con la cédula proporcionada no existe");
         }
-        return false;
-    }
 
+        clienteRepository.delete(cliente);
+        return true;
+    }
 }
+

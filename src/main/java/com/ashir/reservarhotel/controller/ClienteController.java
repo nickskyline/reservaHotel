@@ -22,10 +22,16 @@ public class ClienteController {
     }
 
     @PostMapping
+    @RequestMapping(value = "/crear", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<String> crearCliente(@RequestBody Cliente cliente) {
-        Cliente nuevoCliente = clienteService.crearCliente(cliente);
-        return new ResponseEntity<>("Cliente creado con exito", HttpStatus.CREATED);
+        try {
+            clienteService.crearCliente(cliente);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Cliente creado exitosamente");
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        }
     }
+
 
     @GetMapping
     public ResponseEntity<List<Cliente>> obtenerTodosLosClientes() {
@@ -46,12 +52,11 @@ public class ClienteController {
 
     @PutMapping("/actualizar")
     public ResponseEntity<String> actualizarCliente(@RequestParam("cedula") String cedula, @RequestBody Cliente clienteActualizado) {
-        boolean actualizado = clienteService.actualizarClientePorCedula(cedula, clienteActualizado);
-
-        if (actualizado) {
+        try {
+            boolean actualizado = clienteService.actualizarClientePorCedula(cedula, clienteActualizado);
             return new ResponseEntity<>("Cliente actualizado con exito", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Cliente no encontrado", HttpStatus.NOT_FOUND);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
         }
     }
 
@@ -62,7 +67,7 @@ public class ClienteController {
         if (eliminado) {
             return new ResponseEntity<>("Cliente eliminado con exito", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Cliente no encontrado", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Cliente no encontrado ", HttpStatus.NOT_FOUND);
         }
     }
 

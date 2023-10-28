@@ -1,0 +1,508 @@
+{
+	"info": {
+		"_postman_id": "539479fa-2c7c-4fd1-bed9-2650260e615c",
+		"name": "ReservaHotel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30150757",
+		"_collection_link": "https://grey-star-153033.postman.co/workspace/ReservaVuelos~59b0c254-cf52-4fff-807b-2db578005a18/collection/30150757-539479fa-2c7c-4fd1-bed9-2650260e615c?action=share&source=collection_link&creator=30150757"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Crear cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombres\": \"Juan\",\n    \"apellidos\": \"Perez\",\n    \"cedula\": \"1234567890\",\n    \"direccion\": \"Calle 123, Ciudad\",\n    \"edad\": 30,\n    \"email\": \"juan.perez@email.com\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/clientes/crear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos los clientes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombres\": \"David\",\n    \"apellidos\": \"Sánchez\",\n    \"cedula\": \"4444444444\",\n    \"direccion\": \"Avenida 101, Ciudad Capital\",\n    \"edad\": \"33\",\n    \"email\": \"david.sanchez@email.com\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cliente por cedula",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombres\": \"David\",\n    \"apellidos\": \"Sánchez\",\n    \"cedula\": \"4444444444\",\n    \"direccion\": \"Avenida 101, Ciudad Capital\",\n    \"edad\": \"33\",\n    \"email\": \"david.sanchez@email.com\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/clientes/buscar?cedula=8888888888",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes",
+								"buscar"
+							],
+							"query": [
+								{
+									"key": "cedula",
+									"value": "8888888888"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar cliente por cedula",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombres\": \"Juancita\",\n    \"apellidos\": \"Florez\",\n    \"cedula\": \"8888888888\",\n    \"direccion\": \"Avenida 101, Ciudad Capital\",\n    \"edad\": \"35\",\n    \"email\": \"juana.florez@email.com\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/clientes/actualizar?cedula=8888888888",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes",
+								"actualizar"
+							],
+							"query": [
+								{
+									"key": "cedula",
+									"value": "8888888888"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar cliente por cedula",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/clientes/eliminar?cedula=8888888888",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes",
+								"eliminar"
+							],
+							"query": [
+								{
+									"key": "cedula",
+									"value": "8888888888"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Habitaciones",
+			"item": [
+				{
+					"name": "Crear habitacion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoHabitacion\": \"PREMIUM\",\n  \"precioBase\": 180.0\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/habitaciones/crear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"habitaciones",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todas las habitaciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/habitaciones/todas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"habitaciones",
+								"todas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener habitacion por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/habitaciones/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"habitaciones",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener habitacion disponible por fecha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/habitaciones/disponibles?fechaReserva=2023-11-15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"habitaciones",
+								"disponibles"
+							],
+							"query": [
+								{
+									"key": "fechaReserva",
+									"value": "2023-11-15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener habitacion disponible por fecha y tipo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/habitaciones/disponibles/tipo?fechaReserva=2023-11-18&tipoHabitacion=ESTANDAR",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"habitaciones",
+								"disponibles",
+								"tipo"
+							],
+							"query": [
+								{
+									"key": "fechaReserva",
+									"value": "2023-11-18"
+								},
+								{
+									"key": "tipoHabitacion",
+									"value": "ESTANDAR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar habitacion por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoHabitacion\": \"PREMIUM\",\n  \"precioBase\": 160.0\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/habitaciones/actualizar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"habitaciones",
+								"actualizar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar habitacion por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoHabitacion\": \"PREMIUM\",\n  \"precioBase\": 160.0\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/habitaciones/eliminar/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"habitaciones",
+								"eliminar",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reserva",
+			"item": [
+				{
+					"name": "Crear reserva",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"clienteCedula\": \"3333333333\",\n    \"habitacionId\": 9,\n    \"fechaReserva\": \"2023-11-24\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reservas/crear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reservas",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener reserva por ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clienteCedula\": 1234567890,\n  \"habitacionId\": 1,\n  \"fechaReserva\": \"2023-11-15\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reservas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reservas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar reserva por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clienteCedula\": 1234567890,\n  \"habitacionId\": 1,\n  \"fechaReserva\": \"2023-11-15\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reservas/eliminar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reservas",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar reserva",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"habitacionId\": 2,\n    \"fechaReserva\": \"2023-11-15\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reservas/actualizar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reservas",
+								"actualizar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
