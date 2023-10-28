@@ -1,7 +1,6 @@
 package com.ashir.reservarhotel.repository;
 
 import com.ashir.reservarhotel.entities.Habitacion;
-import com.ashir.reservarhotel.entities.Reserva;
 import com.ashir.reservarhotel.model.TipoHabitacion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

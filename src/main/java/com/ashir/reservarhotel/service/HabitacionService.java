@@ -1,18 +1,13 @@
 package com.ashir.reservarhotel.service;
 
 import com.ashir.reservarhotel.entities.Habitacion;
-import com.ashir.reservarhotel.entities.Reserva;
 import com.ashir.reservarhotel.model.TipoHabitacion;
 import com.ashir.reservarhotel.repository.HabitacionRepository;
 import com.ashir.reservarhotel.repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

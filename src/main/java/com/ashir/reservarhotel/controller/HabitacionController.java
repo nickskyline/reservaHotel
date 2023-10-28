@@ -1,7 +1,6 @@
 package com.ashir.reservarhotel.controller;
 
 import com.ashir.reservarhotel.entities.Habitacion;
-import com.ashir.reservarhotel.entities.Reserva;
 import com.ashir.reservarhotel.model.HabitacionDto;
 import com.ashir.reservarhotel.model.TipoHabitacion;
 import com.ashir.reservarhotel.service.HabitacionService;
@@ -83,3 +82,4 @@ public class HabitacionController {
         return ResponseEntity.ok("Habitación eliminada con éxito");
     }
 }
+
